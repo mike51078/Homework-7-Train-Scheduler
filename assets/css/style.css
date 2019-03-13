@@ -1,0 +1,15 @@
+
+#train-table th,td {
+      display: inline-block;
+      width: 16.575%;
+    }
+
+body {
+    background-image: (url, "https://previews.123rf.com/images/fotodddelli/fotodddelli1204/fotodddelli120400009/13091544-children-background-with-train-plane-and-rainbow.jpg");
+    background-color: blue;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    overflow: auto;
+}
