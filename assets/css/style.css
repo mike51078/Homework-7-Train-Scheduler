@@ -4,16 +4,37 @@
       width: 16.575%;
     }
 
+.card-header {
+    color: black;
+    font-style: bold;
+}
+div {
+    opacity: 0.85;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.container {
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    color: white;
+}
+
 .jumbotron {
     margin-top: 25px;
+    background-color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 body {
-    background-image: (url "https://previews.123rf.com/images/fotodddelli/fotodddelli1204/fotodddelli120400009/13091544-children-background-with-train-plane-and-rainbow.jpg");
-    background-color: blue;
+    background-image: url("https://cdn.pixabay.com/photo/2012/10/10/05/04/locomotive-60539__340.jpg");
+    background-color: gray;
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: 100%;
     overflow: auto;
 }

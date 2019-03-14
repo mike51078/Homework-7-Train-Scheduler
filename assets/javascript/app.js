@@ -40,7 +40,6 @@ $("#add-train-btn").on("click", function(event) {
   console.log(newTrain.destination);
   console.log(newTrain.frequency);
   console.log(newTrain.nextArrival);
-  console.log(newTrain.minutesAway);
 
   alert("New train successfully added");
 
@@ -48,17 +47,17 @@ $("#add-train-btn").on("click", function(event) {
   $("#train-name-input").val("");
   $("#destination-input").val("");
   $("#frequency-input").val("");
-  $("#next-arrival-input").val("");
+  $("#nextArrival-input").val("");
 });
 
 database.ref().on("child_added", function(snapshot) {
 
   var sv = snapshot.val();
 
-  var freq = parseInt(sv.frequency)
+  var freq = parseInt(sv.frequency);
 
-  var dConverted = moment(snapshot.val().time, ("HH:mm").subtract(1, 'years'));
-  var trainTime = moment(dConverted).format('HH:mm');
+  var dConverted = moment(snapshot.val().time, "HH:mm").subtract(1, 'years');
+  var trainTime = moment(dConverted).format("HH:mm");
   var tConverted = moment(trainTime, "HH:mm").subtract(1, 'years');
   var tDifference = moment().diff(moment(tConverted), 'minutes');
   var tRemainder = tDifference % freq;
@@ -68,21 +67,22 @@ database.ref().on("child_added", function(snapshot) {
 
   console.log(trainName);
   console.log(destination);
-  console.log(frequency);
+  console.log(freq);
   console.log(nextArrival);
   console.log(minutesAway);
 
 
   var minutesAway = moment().diff(moment(nextArrival, frequency));
-  console.log(empMonths);
 
 
   var newRow = $("<tr>").append(
-    $("<td>").text(sv.trainName),
+    $("<td>").text(trainName),
     $("<td>").text(sv.destination),
-    $("<td>").text(sv.frequncy),
-    $("<td>").text(moment(nextTrain, 'HH:mm').format("hh:mm a")),
-    $("<td>").text(minutesAway),
+    $("<td>").text(sv.frequency),
+    // $("<td>").text(moment(nextTrain, 'HH:mm').format("HH:mm a")),
+    $("<td>").text(sv.nextArrival),
+    // $("<td>").text(sv.minutesAway),
+    $("<td>").text(sv.nextTrain),
   );
 
   $("#train-table > tbody").append(newRow);
