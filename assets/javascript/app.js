@@ -13,20 +13,24 @@
 
   var database = firebase.database();
 
+  var trainName = "";
+  var destination = "";
+  var frequency = 0;
+  var nextArrival = "";
+
 $("#add-train-btn").on("click", function(event) {
   event.preventDefault();
 
-  var trainName = $("#train-name-input").val().trim();
-  var destination = $("#destination-input").val().trim();
-  var frequency = moment($("#frequency-input").val().trim(), "HH:MM").format("X");
-  var nextArrival = moment($("#next-arrival-input").val().trim(), "HH:MM").format("X");
+  trainName = $("#train-name-input").val().trim();
+  destination = $("#destination-input").val().trim();
+  frequency = $("#frequency-input").val().trim();
+  nextArrival = $("#nextArrival-input").val().trim();
 
   var newTrain = {
     name: trainName,
     destination: destination,
     frequency: frequency,
-    nextArrival: nextArrival,
-    minutesAway: minutesAway
+    nextArrival: nextArrival
   };
 
   database.ref().push(newTrain);
@@ -47,14 +51,20 @@ $("#add-train-btn").on("click", function(event) {
   $("#next-arrival-input").val("");
 });
 
-database.ref().on("child_added", function(childSnapshot) {
-  console.log(childSnapshot.val());
+database.ref().on("child_added", function(snapshot) {
 
-  var trainName = childSnapshot.val().name;
-  var destination = childSnapshot.val().destination;
-  var frequency = childSnapshot.val().frequency;
-  var nextArrival = childSnapshot.val().nextArrival;
-  var minutesAway = childSnapshot.val().minutesAway;
+  var sv = snapshot.val();
+
+  var freq = parseInt(sv.frequency)
+
+  var dConverted = moment(snapshot.val().time, ("HH:mm").subtract(1, 'years'));
+  var trainTime = moment(dConverted).format('HH:mm');
+  var tConverted = moment(trainTime, "HH:mm").subtract(1, 'years');
+  var tDifference = moment().diff(moment(tConverted), 'minutes');
+  var tRemainder = tDifference % freq;
+  var minutesAway = freq - tRemainder;
+  var nextTrain = moment().add(minutesAway, 'minutes');
+
 
   console.log(trainName);
   console.log(destination);
@@ -68,13 +78,18 @@ database.ref().on("child_added", function(childSnapshot) {
 
 
   var newRow = $("<tr>").append(
-    $("<td>").text(trainName),
-    $("<td>").text(destination),
-    $("<td>").text(empStartPretty),
-    $("<td>").text(empMonths),
-    $("<td>").text(nextArrival),
-    $("<td>").text(empBilled)
+    $("<td>").text(sv.trainName),
+    $("<td>").text(sv.destination),
+    $("<td>").text(sv.frequncy),
+    $("<td>").text(moment(nextTrain, 'HH:mm').format("hh:mm a")),
+    $("<td>").text(minutesAway),
   );
 
   $("#train-table > tbody").append(newRow);
-});
+
+
+},  
+  function(errorObject) {
+  console.log("Errors handled: " + errorObject.code)}
+  
+);
