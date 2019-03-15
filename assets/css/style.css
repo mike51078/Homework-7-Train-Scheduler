@@ -1,40 +1,56 @@
 
-#train-table th,td {
-      display: inline-block;
-      width: 16.575%;
-    }
-
-.card-header {
-    color: black;
-    font-style: bold;
-}
-div {
-    opacity: 0.85;
-    background-color: black;
-    border-radius: 10px;
-}
-
-.container {
-    border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding: 20px;
-    color: white;
-}
-
-.jumbotron {
-    margin-top: 25px;
-    background-color: black;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
+/* styling for the background */
 body {
-    background-image: url("https://cdn.pixabay.com/photo/2012/10/10/05/04/locomotive-60539__340.jpg");
-    background-color: gray;
+    background-image: url("https://cdn.shopify.com/s/files/1/1660/9891/products/HTB1eI71XMYDK1JjSZFNq6xnkVXaz_large.jpg?v=1503304611");
+    background-color: linen;
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
     overflow: auto;
+    background-attachment: fixed;
+    font-family: 'Playfair Display SC', serif;
+}
+
+/* setting up border and font color */
+.container {
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    color: black;
+}
+
+/* adjusting text alignment in train table */
+#train-table{
+    text-align: center;
+}
+
+/* styling for the jumbotron */
+.jumbotron {
+    margin-top: 25px;
+    background-color: linen;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* styling for card */
+.card-header {
+    color: black;
+    font-style: bold;
+}
+
+/* styling for the div/container */
+div {
+    opacity: 0.9;
+    background-color: linen;
+    border-radius: 10px;
+}
+
+/* styling for the submit/add train button */
+#add-train-btn {
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: brown;
+    border-color: brown;
 }
